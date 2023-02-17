@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
+import { useSignupUserMutation } from "../services/appApi";
+import { useNavigate } from "react-router-dom";
 import "./TemporaryLogin.css";
 
 function TemporaryLogin() {
   const [name, setName] = useState("");
+  const [signupUser, { isLoading, error }] = useSignupUserMutation();
+  const navigate = useNavigate();
 
   function handleLogin(e) {
     e.preventDefault();
     if (name.length < 3 || name.length > 15) return alert("Name must be between 3 and 15 characters!");
+    signupUser({ name, imageUrl: "probni" }).then(({ data }) => {
+      if (data) {
+        // socket work
+        // navigate to chat
+        console.log(data);
+        navigate("/chat");
+      }
+    });
   }
 
   return (

@@ -8,7 +8,7 @@ const appApi = createApi({
     baseUrl: "http://localhost:5001",
   }),
 
-  endpoints: (builder) => {
+  endpoints: (builder) => ({
     //creating the user
     signupUser: builder.mutation({
       query: (user) => ({
@@ -16,7 +16,7 @@ const appApi = createApi({
         method: "POST",
         body: user,
       }),
-    });
+    }),
 
     //login
     loginUser: builder.mutation({
@@ -25,7 +25,7 @@ const appApi = createApi({
         method: "POST",
         body: user,
       }),
-    });
+    }),
 
     //logout
 
@@ -35,8 +35,8 @@ const appApi = createApi({
         method: "DELETE",
         body: payload,
       }),
-    });
-  },
+    }),
+  }),
 });
 
 export const { useSignupUserMutation, useLoginUserMutation, useLogoutUserMutation } = appApi;
