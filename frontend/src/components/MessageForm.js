@@ -1,7 +1,29 @@
 import React from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import "./MessageForm.css";
 
 function MessageForm() {
-  return <div>MessageForm</div>;
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+  return (
+    <>
+      <div className="messages-output"></div>
+      <Form onSubmit={handleSubmit}></Form>
+      <Row>
+        <Col md={11}>
+          <Form.Group>
+            <Form.Control type="text" placeholder="Your message"></Form.Control>
+          </Form.Group>
+        </Col>
+        <Col md={1}>
+          <Button variant="primary" type="submit" style={{ width: "100%", backgroundColor: "orange" }}>
+            <i className="fas fa-paper-plane"></i>
+          </Button>
+        </Col>
+      </Row>
+    </>
+  );
 }
 
 export default MessageForm;
