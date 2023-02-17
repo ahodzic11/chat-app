@@ -1,0 +1,8 @@
+.home__bg{
+    background-image: url(https://uploads-ssl.webflow.com/61efd93955bc4effe73c257e/62647ff6b509cc22dd268d87_What-Is-SMS-750x400.png);
+    height: 92vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
