@@ -15,3 +15,7 @@ const io = require('socket.io')(server, {
         methods: ['GET', 'POST']
     }
 })
+
+server.listen(PORT, ()=> {
+    console.log("PORT " + PORT)
+})
