@@ -7,6 +7,18 @@ function Sidebar() {
   const user = useSelector((state) => state.user);
   const { socket, setMembers, members, setCurrentRoom, setRooms, privateMemberMsg, rooms, setPrivateMemberMsg, currentRoom } = useContext(AppContext);
 
+  function joinRoom(room, isPublic = true) {
+    if (!user) {
+      return alert("Please login");
+    }
+    socket.emit("join-room", room);
+    setCurrentRoom(room);
+
+    if (isPublic) {
+      setPrivateMemberMsg(null);
+    }
+  }
+
   useEffect(() => {
     if (user) {
       setCurrentRoom("general");
@@ -24,6 +36,21 @@ function Sidebar() {
       .then((res) => res.json())
       .then((data) => setRooms(data));
   }
+
+  function orderIds(firstId, secondId) {
+    if (firstId > secondId) {
+      return firstId + "-" + secondId;
+    } else {
+      return secondId + "-" + firstId;
+    }
+  }
+
+  function handlePrivateMessaging(member) {
+    setPrivateMemberMsg(member);
+    const roomId = orderIds(user._id, member._id);
+    joinRoom(roomId, false);
+  }
+
   if (!user) {
     return <></>;
   }
@@ -33,13 +60,15 @@ function Sidebar() {
       <h2>Available rooms</h2>
       <ListGroup>
         {rooms.map((room, idx) => (
-          <ListGroup.Item key={idx}>{room}</ListGroup.Item>
+          <ListGroup.Item key={idx} onClick={() => joinRoom(room)} active={room == currentRoom} style={{ cursor: "pointer", display: "flex", justifyContent: "space-between" }}>
+            {room} {currentRoom !== room && <span></span>}
+          </ListGroup.Item>
         ))}
       </ListGroup>
       <h2>Members</h2>
       <ListGroup>
         {members.map((member) => (
-          <ListGroup.Item key={member.id} style={{ cursor: "pointer" }}>
+          <ListGroup.Item key={member.id} style={{ cursor: "pointer" }} active={privateMemberMsg?._id == member._id} onClick={() => handlePrivateMessaging(member)} disabled={member._id === user._id}>
             {member.name}
           </ListGroup.Item>
         ))}
