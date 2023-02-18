@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import { useSignupUserMutation } from "../services/appApi";
 import { useNavigate } from "react-router-dom";
 import "./TemporaryLogin.css";
+import { AppContext } from "../context/appContext";
 
 function TemporaryLogin() {
   const [name, setName] = useState("");
   const [signupUser, { isLoading, error }] = useSignupUserMutation();
+  const { socket } = useContext(AppContext);
   const navigate = useNavigate();
 
   function handleLogin(e) {
@@ -15,6 +17,7 @@ function TemporaryLogin() {
     signupUser({ name, imageUrl: "probni" }).then(({ data }) => {
       if (data) {
         // socket work
+        socket.emit("new-user");
         // navigate to chat
         console.log(data);
         navigate("/chat");
