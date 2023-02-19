@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Must be between 3 and 15 characters"],
       unique: true,
     },
-    imgUrl: {
+    imageUrl: {
       type: String,
     },
     newMessages: {

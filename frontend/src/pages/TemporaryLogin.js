@@ -14,7 +14,7 @@ function TemporaryLogin() {
   function handleLogin(e) {
     e.preventDefault();
     if (name.length < 3 || name.length > 15) return alert("Name must be between 3 and 15 characters!");
-    signupUser({ name, imageUrl: "probni" }).then(({ data }) => {
+    signupUser({ name, imageUrl: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" }).then(({ data }) => {
       if (data) {
         // socket work
         socket.emit("new-user");

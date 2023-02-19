@@ -41,15 +41,12 @@ function Navigation() {
               <NavDropdown
                 title={
                   <>
-                    <img src={user.picture} style={{ width: 30, height: 30, marginRight: 10, objectFit: "cover", borderRadius: "50%" }} />
+                    <img src={user.imageUrl} style={{ width: 30, height: 30, marginRight: 10, objectFit: "cover", borderRadius: "50%" }} alt="userpic" />
                     {user.name}
                   </>
                 }
                 id="basic-nav-dropdown"
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
                 <NavDropdown.Item>
                   <Button variant="danger" onClick={handleLogout}>
                     Logout
