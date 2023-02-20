@@ -17,7 +17,7 @@ To build the backend image, use `docker build -t backend .`, while in the backen
 
 Application is dockerized, and the repository can be found on https://hub.docker.com/r/ahodzic11/chat-app-backend.
 
-I uploaded three different docker images, instead of containing them in a single docker container.
+Three different docker images were uploaded, instead of containing them in a single docker container.
 To clone the repository, use `docker pull ahodzic11/chat-app-backend` and the following tags:\
 `frontend` for frontend image, \
 `backend` for backend image, \
