@@ -10,7 +10,7 @@ After cloning the repository, open the terminal and write `npm install` to insta
 `cd backend` and `npm start` or `npm run dev` will start the backend. \
 `cd frontend` and `npm start` will start the frontend.
 
-To run the app using docker containers, clone the GitHub repository, position yourself at the root directory and run `docker-build -t chat-application .`, and then do `docker-compose up`.
+To run the app using docker containers, clone the GitHub repository, position yourself at each folder and build docker images and then do `docker-compose up`, while positioned in the root directory.
 
 Application is dockerized, and the repository can be found on https://hub.docker.com/r/ahodzic11/chat-app-backend.
 
