@@ -13,8 +13,8 @@ After cloning the repository, open the terminal and write `npm install` to insta
 Application is dockerized, and the repository can be found on `https://hub.docker.com/r/ahodzic11/chat-app-backend`.
 
 To clone the repository, use `docker pull ahodzic11/chat-app-backend` and the following tags:\
-`frontend` for frontend image,
-`backend` for backend image,
-`latest` for mongo image.
+`frontend` for frontend image, \
+`backend` for backend image, \
+`latest` for mongo image. \
 
 After that, run docker-compose up and the application will be up and running.
