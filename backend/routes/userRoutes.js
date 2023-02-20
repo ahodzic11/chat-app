@@ -5,7 +5,6 @@ const User = require("../models/User");
 router.post("/", async (req, res) => {
   try {
     const { name, imageUrl } = req.body;
-    console.log(req.body);
     const user = await User.create({ name, imageUrl });
     res.status(201).json(user);
   } catch (e) {
@@ -15,8 +14,17 @@ router.post("/", async (req, res) => {
     } else {
       msg = e.message;
     }
-    console.log(e);
     res.status(400).json(msg);
+  }
+});
+
+//finding user
+router.get("/user", async (req, res) => {
+  try {
+    const user = await User.findOne({ name: req.body.name });
+    res.status(200).json(user);
+  } catch (e) {
+    res.status(400).json(e.message);
   }
 });
 
@@ -29,7 +37,6 @@ router.post("/login", async (req, res) => {
     await user.save();
     res.status(200).json(user);
   } catch (e) {
-    let msg;
     res.status(400).json(e.message);
   }
 });

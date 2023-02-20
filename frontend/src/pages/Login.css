@@ -1,0 +1,67 @@
+.login__bg {
+  background-image: url(https://t3.ftcdn.net/jpg/04/17/77/78/360_F_417777825_v7o8RvkQhxpZkE0ZBD4xwzri5hGFHkO3.jpg);
+  height: 85vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+.signup-profile-pic__container {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  margin-top: 15px;
+}
+
+.signup-profile-pic {
+  width: 100px;
+  border-radius: 50%;
+  border: 2px solid gray;
+  object-fit: cover;
+  height: 100px;
+}
+
+.add-picture-icon {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+  color: green;
+  background: white;
+  cursor: pointer;
+  z-index: 99;
+}
+
+.lower-div {
+  margin-top: 80px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#form-div {
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.chat-now-button {
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
+}
+
+.text-muted {
+  align-items: center;
+  font-size: 12;
+  margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+  .login__bg {
+    display: none;
+  }
+}

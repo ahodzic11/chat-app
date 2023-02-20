@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-//define a service user a base URL
-
 const appApi = createApi({
   reducerPath: "appApi",
   baseQuery: fetchBaseQuery({
@@ -9,7 +7,6 @@ const appApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    //creating the user
     signupUser: builder.mutation({
       query: (user) => ({
         url: "/users",
@@ -18,17 +15,6 @@ const appApi = createApi({
       }),
     }),
 
-    //login
-    loginUser: builder.mutation({
-      query: (user) => ({
-        url: "/users/login",
-        method: "POST",
-        body: user,
-      }),
-    }),
-
-    //logout
-
     logoutUser: builder.mutation({
       query: (payload) => ({
         url: "/logout",
@@ -36,9 +22,17 @@ const appApi = createApi({
         body: payload,
       }),
     }),
+
+    findUser: builder.mutation({
+      query: (payload) => ({
+        url: "/users/user",
+        method: "GET",
+        body: payload,
+      }),
+    }),
   }),
 });
 
-export const { useSignupUserMutation, useLoginUserMutation, useLogoutUserMutation } = appApi;
+export const { useSignupUserMutation, useLogoutUserMutation, useFindUserMutation } = appApi;
 
 export default appApi;

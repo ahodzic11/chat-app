@@ -22,10 +22,6 @@ const io = require("socket.io")(server, {
   },
 });
 
-app.get("/rooms", (req, res) => {
-  res.json(rooms);
-});
-
 async function getMessagesFromRoom(room) {
   let roomMessages = await Message.aggregate([{ $match: { to: room } }, { $group: { _id: "$date", messagesByDate: { $push: "$$ROOT" } } }]);
   return roomMessages;
@@ -35,7 +31,6 @@ function sortRoomMessages(messages) {
   return messages.sort(function (older, newer) {
     let firstDate = older._id.split("/");
     let secondDate = newer._id.split("/");
-    //sorting by year, months & date
     firstDate = firstDate[2] + firstDate[0] + firstDate[1];
     secondDate = secondDate[2] + secondDate[0] + secondDate[1];
 
@@ -43,7 +38,9 @@ function sortRoomMessages(messages) {
   });
 }
 
-// socket connection
+app.get("/rooms", (req, res) => {
+  res.json(rooms);
+});
 
 io.on("connection", (socket) => {
   socket.on("new-user", async () => {
@@ -59,8 +56,32 @@ io.on("connection", (socket) => {
     socket.emit("room-messages", roomMessages);
   });
 
+  socket.on("message-room-entry", async (room, content, sender, time, date) => {
+    if (room.length == 0) room = "general";
+    for (let i = 0; i < rooms.length; i++) {
+      const entryMessage = await Message.find({ content: content, from: sender, time: time, date: date, to: rooms[i] });
+      if (entryMessage.length == 0) {
+        const newEntry = await Message.create({ content, from: sender, time, date, to: rooms[i] });
+      }
+    }
+    let roomMessages = await getMessagesFromRoom(room);
+    roomMessages = sortRoomMessages(roomMessages);
+    io.to(room).emit("room-messages", roomMessages);
+  });
+
   socket.on("message-room", async (room, content, sender, time, date) => {
+    let privateMessage = true;
+    for (let i = 0; i < rooms.length; i++) {
+      if (rooms[i] == room) privateMessage = false;
+    }
+    if (privateMessage) {
+      const entryMessage = await Message.find({ content: "A private conversation has just been started!", to: room });
+      if (entryMessage.length == 0) {
+        const newEntry = await Message.create({ content: "A private conversation has just been started!", from: { name: "system" }, time, date, to: room });
+      }
+    }
     const newMessage = await Message.create({ content, from: sender, time, date, to: room });
+
     let roomMessages = await getMessagesFromRoom(room);
     roomMessages = sortRoomMessages(roomMessages);
     io.to(room).emit("room-messages", roomMessages);

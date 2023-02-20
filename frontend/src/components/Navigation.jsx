@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Nav, Navbar, Container, Button, NavDropdown } from "react-bootstrap";
 import { useLogoutUserMutation } from "../services/appApi";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import logo from "../assets/logo.png";
+import { AppContext } from "../context/appContext";
+import { time, todayDate } from "../util";
 
 function Navigation() {
   const user = useSelector((state) => state.user);
   const [logoutUser] = useLogoutUserMutation();
+  const { socket, currentRoom, setMessages } = useContext(AppContext);
 
   async function handleLogout(e) {
     e.preventDefault();
     await logoutUser(user);
+    socket.emit("message-room-entry", currentRoom, "User " + user.name + " just left this room, farewell!", { name: "system" }, time, todayDate);
     window.location.replace("/");
   }
+
+  socket.off("room-messages").on("room-messages", (roomMessages) => {
+    setMessages(roomMessages);
+  });
 
   return (
     <Navbar bg="light" expand="lg">

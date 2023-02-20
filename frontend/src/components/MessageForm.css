@@ -19,6 +19,18 @@
   background-color: #d1e7dd;
 }
 
+.system-message {
+  margin-bottom: 10px;
+  padding: 10px;
+  min-width: 30px;
+  min-height: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font: 400 1em, sans-serif;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+}
+
 .incoming-message .message-inner {
   background-color: #ffdab9;
 }
@@ -49,7 +61,7 @@
   padding: 0;
   margin: 0 auto;
   text-align: center;
-  height: 100px;
+  height: 50;
 }
 
 .conversation-profile-picture {
@@ -60,4 +72,31 @@
   margin-bottom: 30px;
   border-radius: 50%;
   margin-left: 10px;
+}
+
+.message-timestamp {
+  margin-bottom: 0;
+}
+
+.icon-paperplane {
+  padding: 0;
+}
+
+#buttonSubmit {
+  padding-left: 0;
+  padding-right: 0;
+  width: 15px;
+}
+
+.paperplane-column {
+  width: 30px;
+}
+
+.form-column {
+  padding-right: 0;
+}
+
+.form-column-group {
+  padding: 0;
+  margin-bottom: 15px;
 }
