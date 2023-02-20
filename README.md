@@ -18,3 +18,5 @@ To clone the repository, use `docker pull ahodzic11/chat-app-backend` and the fo
 `latest` for mongo image. 
 
 After that, run docker-compose up and the application will be up and running.
+
+Another way to launch it is to clone the GitHub repository, position yourself at the root directory and run `docker-build -t chat-application .`, and then do `docker-compose up`.
